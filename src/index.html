@@ -46,19 +46,20 @@
                 id="binaryInput"
               />
             </div>
-            <p class="help">This is a help text</p>
           </div>
 
           <div class="field">
             <label class="label">Select the line code</label>
             <div class="control">
-              <div class="select">
-                <select name="method" id="method">
+              <div class="select" id="select-container">
+                <select name="method" id="user-choice" required>
                   <option value=""></option>
-                  <option value="">RZ</option>
-                  <option value="">NRZ-L</option>
-                  <option value="">NRZ-I</option>
-                  <option value="">RZ</option>
+                  <option value="rz">RZ</option>
+                  <option value="nrzl">NRZ-L</option>
+                  <option value="nrzi">NRZ-I</option>
+                  <option value="ami">AMI</option>
+                  <option value="pseudo">Pseudoternary</option>
+                  <option value="manchester">Manchester</option>
                 </select>
               </div>
             </div>
@@ -81,6 +82,8 @@
 
     <script>
       const userBinary = document.getElementById('binaryInput')
+      const userChoice = document.getElementById('user-choice')
+      const selectContainer = document.getElementById('select-container')
       const form = document.getElementById('form-inputs')
       const submitButton = document.getElementById('submit-button')
       const regexBinary = new RegExp(/\b[01]+\b/)
@@ -91,6 +94,21 @@
 
       form.addEventListener('submit', function (evt) {
         evt.preventDefault()
+      })
+
+      userChoice.addEventListener('change', function (evt) {
+        if (this.value === '' || this.value === null) {
+          submitButton.disabled = true
+          if (selectContainer.classList.contains('is-success')) {
+            selectContainer.classList.remove('is-success')
+          }
+          selectContainer.classList.add('is-danger')
+        } else {
+          if (selectContainer.classList.contains('is-danger')) {
+            selectContainer.classList.remove('is-danger')
+          }
+          selectContainer.classList.add('is-success')
+        }
       })
 
       userBinary.addEventListener('keyup', function (evt) {
