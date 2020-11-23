@@ -4,7 +4,7 @@
   "description": "Graphics created with chartjs ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js"
   },
   "author": "axelespiosadev",
   "license": "MIT",
@@ -17,5 +17,8 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
