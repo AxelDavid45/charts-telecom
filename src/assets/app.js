@@ -50,7 +50,6 @@ function validateMethod(evt) {
 
 function validateBinary(evt) {
   let condition = regexBinary.test(this.value)
-  console.log(regexBinary.test(this.value))
   if (condition) {
     submitButton.disabled = false
     if (userBinary.classList.contains('is-danger')) {
