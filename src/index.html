@@ -94,6 +94,18 @@
 
       form.addEventListener('submit', function (evt) {
         evt.preventDefault()
+        const dataInArrays = transformToArray(userBinary.value)
+        let numbersTransformed = null
+        if (userChoice.value === 'rz') {
+          numbersTransformed = rzMethod(dataInArrays.integers)
+        }
+        const configs = {
+          labels: dataInArrays.strings,
+          customData: numbersTransformed,
+        }
+        const options = templateChart(configs)
+        const ctx = document.getElementById('myChart').getContext('2d')
+        const myChart = new Chart(ctx, options)
       })
 
       userChoice.addEventListener('change', function (evt) {
@@ -129,23 +141,24 @@
         }
       })
 
-      const ctx = document.getElementById('myChart').getContext('2d')
-      const myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['1', '0', '1', '0', '1'],
-          datasets: [
-            {
-              label: 'Your number',
-              data: [1, -1, 0, 1, 1],
-              fill: false,
-              steppedLine: true,
-              borderColor: ['rgba(255, 99, 132, 1)'],
-              borderWidth: 3,
-            },
-          ],
-        },
-      })
+      function templateChart({ labels, customData }) {
+        return {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Your numbers',
+                data: customData,
+                fill: false,
+                steppedLine: true,
+                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderWidth: 3,
+              },
+            ],
+          },
+        }
+      }
 
       function rzMethod(data = []) {
         if (!data) {
@@ -161,11 +174,11 @@
       }
 
       function transformToArray(data = '') {
-        if (typeof data !== String) {
-          throw new Error('data must be a string')
+        const transformed = data.split('')
+        return {
+          integers: transformed.map((curret) => parseInt(curret)),
+          strings: data.split(''),
         }
-
-        return data.split('')
       }
     </script>
   </body>
