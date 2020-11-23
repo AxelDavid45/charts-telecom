@@ -35,11 +35,16 @@
 
     <section class="section">
       <div class="container">
-        <form action="#">
+        <form action="#" id="form-inputs">
           <div class="field">
             <label class="label">Write the binary number</label>
             <div class="control">
-              <input class="input" type="text" placeholder="10101001101" />
+              <input
+                class="input"
+                type="text"
+                placeholder="10101001101"
+                id="binaryInput"
+              />
             </div>
             <p class="help">This is a help text</p>
           </div>
@@ -60,7 +65,9 @@
             <p class="help">This is a help text</p>
           </div>
           <div class="control">
-            <button class="button is-primary">Render it!</button>
+            <button class="button is-primary" id="submit-button">
+              Render it!
+            </button>
           </div>
         </form>
       </div>
@@ -73,8 +80,39 @@
     </section>
 
     <script>
-      var ctx = document.getElementById('myChart').getContext('2d')
-      var myChart = new Chart(ctx, {
+      const userBinary = document.getElementById('binaryInput')
+      const form = document.getElementById('form-inputs')
+      const submitButton = document.getElementById('submit-button')
+      const regexBinary = new RegExp(/\b[01]+\b/)
+
+      document.addEventListener('DOMContentLoaded', () => {
+        submitButton.disabled = true
+      })
+
+      form.addEventListener('submit', function (evt) {
+        evt.preventDefault()
+      })
+
+      userBinary.addEventListener('keyup', function (evt) {
+        let condition = regexBinary.test(this.value)
+        console.log(regexBinary.test(this.value))
+        if (condition) {
+          submitButton.disabled = false
+          if (userBinary.classList.contains('is-danger')) {
+            userBinary.classList.remove('is-danger')
+          }
+          userBinary.classList.add('is-success')
+        } else {
+          if (userBinary.classList.contains('is-success')) {
+            userBinary.classList.remove('is-success')
+          }
+          submitButton.disabled = true
+          userBinary.classList.add('is-danger')
+        }
+      })
+
+      const ctx = document.getElementById('myChart').getContext('2d')
+      const myChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: ['1', '0', '1', '0', '1'],
