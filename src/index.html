@@ -96,13 +96,18 @@
         evt.preventDefault()
         const dataInArrays = transformToArray(userBinary.value)
         let numbersTransformed = null
+
         if (userChoice.value === 'rz') {
           numbersTransformed = rzMethod(dataInArrays.integers)
+        } else if (userChoice.value === 'nrzl') {
+          numbersTransformed = nrzlMethod(dataInArrays.integers)
         }
+
         const configs = {
           labels: dataInArrays.strings,
           customData: numbersTransformed,
         }
+
         const options = templateChart(configs)
         const ctx = document.getElementById('myChart').getContext('2d')
         const myChart = new Chart(ctx, options)
@@ -169,6 +174,22 @@
           if (current === 0) {
             current = -1
           }
+          return current
+        })
+      }
+
+      function nrzlMethod(data = []) {
+        if (!data) {
+          throw new Error('missing data parameter')
+        }
+
+        return data.map((current) => {
+          if (current === 1) {
+            current = -1
+          } else {
+            current = 1
+          }
+
           return current
         })
       }
