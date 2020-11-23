@@ -8,7 +8,7 @@ export function templateChart({ labels, customData }) {
           label: 'Your numbers',
           data: customData,
           fill: false,
-          steppedLine: true,
+          steppedLine: 'after',
           borderColor: ['rgba(255, 99, 132, 1)'],
           borderWidth: 3,
         },
