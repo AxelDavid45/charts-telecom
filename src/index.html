@@ -101,6 +101,8 @@
           numbersTransformed = rzMethod(dataInArrays.integers)
         } else if (userChoice.value === 'nrzl') {
           numbersTransformed = nrzlMethod(dataInArrays.integers)
+        } else if (userChoice.value === 'nrzi') {
+          numbersTransformed = nrziMethod(dataInArrays.integers)
         }
 
         const configs = {
@@ -192,6 +194,28 @@
 
           return current
         })
+      }
+
+      function nrziMethod(data = []) {
+        if (!data) {
+          throw new Error('missing data parameter')
+        }
+
+        let previous = data[0]
+        for (let i = 1; i <= data.length - 1; i++) {
+          if (data[i] === 0) {
+            data[i] = previous
+          } else {
+            if (previous === 0) {
+              data[i] = 1
+            } else {
+              data[i] = 0
+            }
+          }
+
+          previous = data[i]
+        }
+        return data
       }
 
       function transformToArray(data = '') {
