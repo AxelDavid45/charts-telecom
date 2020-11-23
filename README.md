@@ -1,4 +1,4 @@
-# Line codes examples
+# Line codes examples 🎓
 
 Charts to represent the different line codes in charts.
 
@@ -9,13 +9,17 @@ Clone the repository, you must have installed Nodejs in your computer if you wan
 ```bash
 # Installs development tools
 npm install
-
 ```
 
-## Usage
+## Usage 🤯
 
-If you only want to see the web site you can open the `index.html` in your browser.
+- If you want to see the project working you can run the command `npm run start`, this will create a localserver in your computer running on port 3000 by default unless you indicate another one. You should have installed Node LTS.
 
-Licensed under MIT
+- If you only want to see the website without bootstraping any server, open the `index.html` file on your browser.
 
-Author: Axel Espinosa
+
+
+
+License: MIT
+
+Author💻: Axel Espinosa
